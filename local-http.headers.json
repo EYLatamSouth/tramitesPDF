@@ -1,0 +1,8 @@
+[
+  {
+    "X-Frame-Options": "ALLOW-FROM *.crm.ondemand.com/"
+  },
+  {
+    "Test-Additional-Header": "1"
+  }
+]

@@ -1,0 +1,87 @@
+_schema-version: "3.2"
+ID: tramitesPDF
+description: tramitesPDF.
+version: 1.3.0
+
+modules:
+- name: tramitesPDF-destination-content
+  type: com.sap.application.content
+  requires:
+  - name: tramitesPDF-destination-service
+    parameters:
+      content-target: true
+  - name: tramitesPDF_html_repo_host
+    parameters:
+      service-key:
+        name: tramitesPDF_html_repo_host-key
+  - name: uaa_tramitesPDF
+    parameters:
+      service-key:
+        name: uaa_tramitesPDF-key
+  parameters:
+    content:
+      instance:
+        destinations:
+        - Name: approuter_tramitesPDF_html_repo_host
+          ServiceInstanceName: tramitesPDF-html5-app-host-service
+          ServiceKeyName: tramitesPDF_html_repo_host-key
+          sap.cloud.service: approuter
+        - Authentication: OAuth2UserTokenExchange
+          Name: approuter_uaa_tramitesPDF
+          ServiceInstanceName: tramitesPDF-xsuaa-service
+          ServiceKeyName: uaa_tramitesPDF-key
+          sap.cloud.service: approuter
+        existing_destinations_policy: ignore
+  build-parameters:
+    no-source: true
+
+- name: tramitesPDF_ui_deployer
+  type: com.sap.application.content
+  path: .
+  requires:
+  - name: tramitesPDF_html_repo_host
+    parameters:
+      content-target: true
+  build-parameters:
+    build-result: resources
+    requires:
+    - artifacts:
+      - tramitesPDF-content.zip
+      name: tramitesPDF
+      target-path: resources/
+
+- name: tramitesPDF
+  type: html5
+  path: tramitesPDF
+  build-parameters:
+    builder: custom
+    commands:
+    - npm install
+    - npm run buildBtp
+    supported-platforms: []
+
+resources:
+- name: tramitesPDF-destination-service
+  type: org.cloudfoundry.managed-service
+  parameters:
+    config:
+      HTML5Runtime_enabled: true
+      version: 1.2.0
+    service: destination
+    service-name: tramitesPDF-destination-service
+    service-plan: lite
+
+- name: tramitesPDF_html_repo_host
+  type: org.cloudfoundry.managed-service
+  parameters:
+    service: html5-apps-repo
+    service-name: tramitesPDF-html5-app-host-service
+    service-plan: app-host
+
+- name: uaa_tramitesPDF
+  type: org.cloudfoundry.managed-service
+  parameters:
+    path: ./xs-security.json
+    service: xsuaa
+    service-name: tramitesPDF-xsuaa-service
+    service-plan: application

@@ -1,0 +1,17 @@
+{
+  "_version": "1.0.0",
+  "sap.app": {
+    "id": "tramitespdf",
+    "type": "application",
+    "title": "Tramites PDF",
+    "applicationVersion": {
+      "version": "1.0.0"
+    }
+  },
+  "sap.ui": {
+    "technology": "URL"
+  },
+  "sap.cloud": {
+    "service": "approuter"
+  }
+}
