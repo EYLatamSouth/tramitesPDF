@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 //import { config as envConfig } from "../Entorno/Entorno";
-import { api } from "../services/config";
+
 // import data from "../apis/test-contratos-baja-3833.json";
 //import data from "../apis/test-response-userDetails.json";
 import axios from "axios";
@@ -19,7 +19,9 @@ const usePDF = (tramite: string | null, usuario: string | null) => {
         }
     })
 
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         .then((response: any) => setResult(response))
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         .catch((error: any) => {
           console.error(error);
         });

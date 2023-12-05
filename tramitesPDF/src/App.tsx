@@ -1,5 +1,3 @@
-import { useState } from 'react'
-import { Viewer, Worker, useIsomorphicLayoutEffect } from '@react-pdf-viewer/core';
 import '@react-pdf-viewer/core/lib/styles/index.css'
 /* import './App.css' */
 import { PDF } from './pdf';
@@ -18,7 +16,7 @@ function App() {
 
     const bytes = atob(base64WithoutPrefix);
     let length = bytes.length;
-    let out = new Uint8Array(length);
+    const out = new Uint8Array(length);
 
     while (length--) {
       out[length] = bytes.charCodeAt(length);
@@ -29,7 +27,6 @@ function App() {
 
   const blob = base64toBlob(PDF);
   const url = URL.createObjectURL(blob);
-  const fileName = "test.pdf";
 
   return (
     <>
