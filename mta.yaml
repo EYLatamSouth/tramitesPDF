@@ -66,7 +66,7 @@ resources:
   parameters:
     config:
       HTML5Runtime_enabled: true
-      version: 1.2.0
+      version: 1.0.0
     service: destination
     service-name: tramitesPDF-destination-service
     service-plan: lite
