@@ -7,7 +7,7 @@ import axios from "axios";
 
 
 const usePDF = (tramite: string | null, usuario: string | null) => {
-  const [result, setResult] = useState("");
+  const [result, setResult] = useState(new Blob);
  
   useEffect(() => {
     //if (envConfig) {
@@ -16,7 +16,8 @@ const usePDF = (tramite: string | null, usuario: string | null) => {
         headers: {
         "Content-Type": "application/json",
         referer: "https://sap-integration-suite-y97uqswe.launchpad.cfapps.us10.hana.ondemand.com",
-        }
+        },
+        responseType: "blob"
     })
 
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -30,7 +31,6 @@ const usePDF = (tramite: string | null, usuario: string | null) => {
       // setResult(data.results[0]);
     //}
   }, []);
- console.log("USEPDF:", result)
   return {
     result
   };
