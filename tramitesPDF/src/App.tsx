@@ -1,6 +1,5 @@
 import '@react-pdf-viewer/core/lib/styles/index.css'
 /* import './App.css' */
-import { PDF } from './pdf';
 import usePDF from './hooks/usePDF';
 
 function App() {
@@ -10,6 +9,8 @@ function App() {
 
   const { result } = usePDF(tramiteParam, userParam)
 
+  const binarioTest = btoa(result)
+  
   const base64toBlob = (data: string) => {
     // Cut the prefix `data:application/pdf;base64` from the raw base 64
     const base64WithoutPrefix = data.substring('data:application/pdf;base64,'.length);
@@ -21,11 +22,11 @@ function App() {
     while (length--) {
       out[length] = bytes.charCodeAt(length);
     }
-    console.log("RESULT ", result)
+
     return new Blob([out], { type: 'application/pdf' });
   };
 
-  const blob = base64toBlob(PDF);
+  const blob = base64toBlob(binarioTest);
   const url = URL.createObjectURL(blob);
 
   return (

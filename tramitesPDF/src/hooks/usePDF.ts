@@ -7,7 +7,7 @@ import axios from "axios";
 
 
 const usePDF = (tramite: string | null, usuario: string | null) => {
-  const [result, setResult] = useState({});
+  const [result, setResult] = useState("");
  
   useEffect(() => {
     //if (envConfig) {
@@ -20,7 +20,7 @@ const usePDF = (tramite: string | null, usuario: string | null) => {
     })
 
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        .then((response: any) => setResult(response))
+        .then((response: any) => setResult(response.data))
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         .catch((error: any) => {
           console.error(error);
@@ -30,7 +30,7 @@ const usePDF = (tramite: string | null, usuario: string | null) => {
       // setResult(data.results[0]);
     //}
   }, []);
- 
+ console.log("USEPDF:", result)
   return {
     result
   };
