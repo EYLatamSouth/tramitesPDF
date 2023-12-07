@@ -1,5 +1,5 @@
 import '@react-pdf-viewer/core/lib/styles/index.css'
-/* import './App.css' */
+// import './App.css' 
 import usePDF from './hooks/usePDF';
 
 function App() {
@@ -14,7 +14,7 @@ function App() {
   return (
     <>
       <div className="App">
-        <div className='test'>
+        <div className='test' style={{display: "flex", justifyContent: "center"}}>
           <embed src={`${url}#zoom=FitH`} width={1000} height={900}></embed>
         </div>
       </div>
