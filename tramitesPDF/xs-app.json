@@ -1,5 +1,5 @@
 {
-  "welcomeFile": "/build/index.html",
+  "welcomeFile": "/dist/index.html",
   "authenticationMethod": "route",
   "logout": {
     "logoutEndpoint": "/do/logout"

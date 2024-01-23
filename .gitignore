@@ -9,8 +9,8 @@
 /coverage
 
 # production
-/build
-/tramitesPDF/build
+/dist
+/tramitesPDF/dist
 
 # mta-archives
 /mta_archives
