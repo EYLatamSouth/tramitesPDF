@@ -7,6 +7,7 @@ function App() {
   const tramiteParam = urlParams.get("id");
   const userParam = urlParams.get("usuario");
 
+  // @ts-ignore
   const { result } = usePDF(tramiteParam, userParam)
 
   const url = URL.createObjectURL(result);
@@ -14,7 +15,7 @@ function App() {
   return (
     <>
       <div className="App">
-        <div className='test'>
+        <div className='container'>
           <embed src={`${url}#zoom=FitH`} width={1000} height={900}></embed>
         </div>
       </div>

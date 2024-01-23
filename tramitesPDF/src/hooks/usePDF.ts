@@ -1,36 +1,27 @@
 import { useEffect, useState } from "react";
-//import { config as envConfig } from "../Entorno/Entorno";
-
-// import data from "../apis/test-contratos-baja-3833.json";
-//import data from "../apis/test-response-userDetails.json";
-import axios from "axios";
+import { config as envConfig } from "../Entorno/Entorno";
+import { api } from "../services/config";
 
 
-const usePDF = (tramite: string | null, usuario: string | null) => {
+const usePDF = (tramite: string, usuario: string) => {
   const [result, setResult] = useState(new Blob);
  
   useEffect(() => {
-    //if (envConfig) {
-      /*                 Deploy                    */
-      axios.get(`https://osde-dev.prod.apimanagement.us10.hana.ondemand.com/v1/CPI/getGSC_PDF?tramite=${tramite}&usuario=${usuario}&system=C4C`, {
-        headers: {
-        "Content-Type": "application/json",
-        referer: "https://sap-integration-suite-y97uqswe.launchpad.cfapps.us10.hana.ondemand.com",
-        },
-        responseType: "blob"
-    })
-
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        .then((response: any) => setResult(response.data))
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        .catch((error: any) => {
-          console.error(error);
-        });
-    //} else {
+    if (envConfig) {
+      if (tramite !== ""  && usuario !== "") {
+        api(tramite, usuario)
+        // @ts-ignore
+          .get()
+          .then((response) => setResult(response.data))
+          .catch((error) => {
+            console.error(error);
+          });
+      }
+    } else {
       /*                 Local                    */
-      // setResult(data.results[0]);
-    //}
-  }, []);
+      //setResult(data.results[0]);
+    }
+  }, [tramite]);
   return {
     result
   };
