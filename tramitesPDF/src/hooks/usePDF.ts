@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { config as envConfig } from "../Entorno/Entorno";
+import {environment} from "../Entorno/Entorno"
 import { api } from "../services/config";
 
 
@@ -7,7 +7,7 @@ const usePDF = (tramite: string, usuario: string) => {
   const [result, setResult] = useState(new Blob);
  
   useEffect(() => {
-    if (envConfig) {
+    if (environment) {
       if (tramite !== ""  && usuario !== "") {
         api(tramite, usuario)
         // @ts-ignore
