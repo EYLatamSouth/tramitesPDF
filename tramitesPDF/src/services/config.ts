@@ -14,4 +14,5 @@ export const api = (tramite: string, usuario: string) =>
       "Content-Type": "application/json",
       referer: refererPRODHeader,
     },
+    responseType: 'blob'
   });
